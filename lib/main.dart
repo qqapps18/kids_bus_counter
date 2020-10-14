@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 void main() {
   runApp(KidBusControl());
 }
@@ -13,7 +15,7 @@ class KidBusControl extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: KidBusCounter(title: 'Flutter Demo Home Page'),
+      home: KidBusCounter(title: 'Student Bus Control'),
     );
   }
 }
@@ -28,32 +30,40 @@ class KidBusCounter extends StatefulWidget {
 }
 
 class _KidBusCounterState extends State<KidBusCounter> {
-  String imagebacground =  'images/schoolbuilding.png';
+  String imagebacground = 'images/schoolbuilding.png';
   int _counter = 0;
+  String message = "No Kid's in the Bus";
+  var messprt = "No Kid's in the Bus";
+
+
+  DateTime date = DateTime.now();
+
 
   void _incrementCounter() {
     setState(() {
       imagebacground = 'images/childenterbus.png';
+      messprt = _counter.toString();
       _counter++;
     });
   }
 
   void _decreaseCounter() {
     setState(() {
-      if(_counter > 0) {
-      _counter--;
-      if(_counter == 0){
-        imagebacground =  'images/schoolbuilding.png';
-      } else {
-        imagebacground = 'images/kidexitbus.png';
-      }}
+      if (_counter > 0) {
+        _counter--;
+        if (_counter == 0) {
+          messprt = message;
+          imagebacground = 'images/schoolbuilding.png';
+        } else {
+          messprt = _counter.toString();
+          imagebacground = 'images/kidexitbus.png';
+        }
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -67,32 +77,36 @@ class _KidBusCounterState extends State<KidBusCounter> {
               child: Container(
                 height: 200,
                 width: 200,
-                child: Image.asset(imagebacground,
-                scale: 2,
-                alignment:Alignment.topCenter ,),
-
+                child: Image.asset(
+                  imagebacground,
+                  scale: 2,
+                  alignment: Alignment.topCenter,
+                ),
               ),
             ),
-
+            Text(DateFormat.yMMMd().format(date)),
             Text(
               'Kid Bus Counter',
               style: TextStyle(
                 fontSize: 25,
+                color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+              '$messprt',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton:
-      Padding(
+      floatingActionButton: Padding(
         padding: const EdgeInsets.fromLTRB(40, 25, 25, 25),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FloatingActionButton(
               onPressed: _incrementCounter,
