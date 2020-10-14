@@ -35,9 +35,7 @@ class _KidBusCounterState extends State<KidBusCounter> {
   String message = "No Kid's in the Bus";
   var messprt = "No Kid's in the Bus";
 
-
   DateTime date = DateTime.now();
-
 
   void _incrementCounter() {
     setState(() {
@@ -73,22 +71,28 @@ class _KidBusCounterState extends State<KidBusCounter> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               child: Container(
-                height: 200,
-                width: 200,
+                height: 225,
+                width: 250,
                 child: Image.asset(
                   imagebacground,
-                  scale: 2,
+                  scale: 1.5,
+                  //             fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
                 ),
               ),
             ),
-            Text(DateFormat.yMMMd().format(date)),
+            Text(DateFormat.yMMMd().format(date),
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.bold,
+                )),
             Text(
               'Kid Bus Counter',
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 35,
                 color: Colors.green,
                 fontWeight: FontWeight.bold,
               ),
@@ -96,7 +100,7 @@ class _KidBusCounterState extends State<KidBusCounter> {
             Text(
               '$messprt',
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
               ),
             )
